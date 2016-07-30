@@ -25,6 +25,14 @@ namespace TexasPoker.Manager.Test
 
             float getResult = await grain.GetPumpingRate();
             Assert.AreEqual(expectedRate, getResult);
+
+            int desktopId = 1;
+            int expectedSeatFee = 100;
+            var setResult1 = await grain.SetSeatFee(desktopId, expectedSeatFee);
+            Assert.AreEqual(expectedSeatFee, setResult1[desktopId]);
+
+            var getResult1 = await grain.GetSeatFee();
+            Assert.AreEqual(expectedSeatFee, getResult1[desktopId]);
         }
     }
 }

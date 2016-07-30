@@ -11,5 +11,9 @@ namespace TexasPoker.Manager.GrainInterface
         Task<float> GetPumpingRate();
 
         Task<float> SetPumpingRate(float rate);
+
+        Task<Dictionary<int, int>> GetSeatFee();
+
+        Task<Dictionary<int, int>> SetSeatFee(int desktopId, int fee);
     }
 }
