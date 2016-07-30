@@ -52,13 +52,28 @@ namespace Tests
             const string greeting = "Bonjour";
 
             IHello grain = GrainFactory.GetGrain<IHello>(id);
-            
+
             // This will create and call a Hello grain with specified 'id' in one of the test silos.
             string reply = await grain.SayHello(greeting);
-            
+
             Assert.IsNotNull(reply, "Grain replied with some message");
             string expected = string.Format("You said: '{0}', I say: Hello!", greeting);
             Assert.AreEqual(expected, reply, "Grain replied with expected message");
+        }
+
+        [TestMethod]
+        public async Task CounterPlusplusTest()
+        {
+            // The Orleans silo / client test environment is already set up at this point.
+
+            const long id = 0;
+            int counter = 0;
+            ICount grain = GrainFactory.GetGrain<ICount>(id);
+
+            counter = await grain.Plusplus();
+            Assert.AreEqual(counter, 1);
+            counter = await grain.Plusplus();
+            Assert.AreEqual(counter, 2);
         }
     }
 }
